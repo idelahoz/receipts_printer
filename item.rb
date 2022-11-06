@@ -17,10 +17,6 @@ class Item
     @quantity ||= @line.split(" ").first.to_i
   end
 
-  def total
-    @total ||= quantity * price
-  end
-
   def total_with_taxes
     @total_with_tax ||= (total + tax ).round(2)
   end
@@ -55,5 +51,9 @@ class Item
 
   def round_to_5_cents(num)
     (num * 20.0).ceil.to_f / 20.0
+  end
+
+  def total
+    @total ||= quantity * price
   end
 end
