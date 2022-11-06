@@ -32,7 +32,8 @@ class Item
   private
 
   def import_tax
-    @import_tax ||= imported? ? (total * 0.05).round(2) : 0.0
+    return 0.0 unless imported?
+    @import_tax ||= round_to_5_cents(price * 0.05) * quantity
   end
 
   def exempt?
@@ -50,5 +51,9 @@ class Item
   def exempt_products
     products = YAML.load_file("./product_categories.yml").values.flatten
     products + products.map { |p| "#{p}s" }
+  end
+
+  def round_to_5_cents(num)
+    (num * 20.0).ceil.to_f / 20.0
   end
 end
