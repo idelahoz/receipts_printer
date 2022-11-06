@@ -1,6 +1,8 @@
 require './sale_processor.rb'
 
-files = Dir.entries("fixtures").select { |f| File.file? File.join("fixtures", f) }
+directory_input = ARGV[0] || "fixtures"
+
+files = Dir.entries(directory_input).select { |f| File.file? File.join(directory_input, f) }
 files.each_with_index do |file, i|
   items = File.open(File.join("fixtures", file)).to_a
   puts "receipt for #{file}"
