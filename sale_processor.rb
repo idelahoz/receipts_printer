@@ -8,10 +8,10 @@ class SaleProcessor\
   def print_receipt
     receipt = ""
     items.each do |item|
-      receipt << "#{item.quantity} #{item.product}: #{item.total_with_taxes}\n"
+      receipt << "#{item.quantity} #{item.product}: #{sprintf('%.2f',item.total_with_taxes)}\n"
     end
-    receipt << "Sales Taxes: #{sales_taxes}\n"
-    receipt << "Total: #{total}"
+    receipt << "Sales Taxes: #{sprintf('%.2f',sales_taxes)}\n"
+    receipt << "Total: #{sprintf('%.2f',total)}"
   end
 
   private
